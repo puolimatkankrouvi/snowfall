@@ -1,4 +1,4 @@
-import { Observable, of, timer } from "rxjs";
+import { Observable, timer } from "rxjs";
 import { map } from "rxjs/operators";
 
 export interface ICoordinates {
@@ -10,7 +10,7 @@ function randomNumber(max: number) {
   return Math.floor(Math.random() * max);
 }
 
-export function generateCoordinates(inMilliseconds: number): Observable<ICoordinates> {
+export function generateCoordinate(inMilliseconds: number, max: number): Observable<number> {
   return timer(inMilliseconds, inMilliseconds)
-        .pipe(map(_ => ({x: randomNumber(800), y: randomNumber(600)})));
+        .pipe(map(_ => (randomNumber(max))));
 }
