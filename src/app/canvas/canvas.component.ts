@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { canvasWidth, canvasHeight, ICoordinate } from 'src/app/coordinates';
-import { SnowflakeService } from '../snowflake.service';
+import { SnowflakeService } from 'src/app/snowflake.service';
 
 @Component({
   selector: 'app-canvas',
@@ -22,20 +22,18 @@ export class CanvasComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.ctx = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
     this.snowflakeService
-      .snowflakeChanges$
-      .subscribe(snowflakeCoordinates => this.printSnowflakes(snowflakeCoordinates));
+      .snowflakeCoordinateChanges$
+      .subscribe(snowflakeCoordinates => this.redrawSnowflakes(snowflakeCoordinates));
   }
   
-  private printSnowflakes(snowflakeCoordinates: ReadonlyArray<ICoordinate>) {
-    if (this.ctx) {  
-      this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  private redrawSnowflakes(snowflakeCoordinates: ReadonlyArray<ICoordinate>) { 
+    this.ctx!.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      snowflakeCoordinates.forEach(coordinate => {     
-        this.ctx!.beginPath()
-        this.ctx!.arc(coordinate.x, coordinate.y, 5, 0, 2 * Math.PI);
-        this.ctx!.stroke();
-      });
-    }
+    snowflakeCoordinates.forEach(coordinate => {     
+      this.ctx!.beginPath()
+      this.ctx!.arc(coordinate.x, coordinate.y, 5, 0, 2 * Math.PI);
+      this.ctx!.stroke();
+    });
   }
 }
 

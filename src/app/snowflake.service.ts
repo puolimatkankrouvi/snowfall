@@ -6,20 +6,18 @@ import { canvasHeight, canvasWidth, ICoordinate } from 'src/app/coordinates';
 @Injectable({
   providedIn: 'root'
 })
-export class SnowflakeService {
-  
-  private snowflakeCoordinates: Array<ICoordinate>;
-  public snowflakeChanges$ = new Subject<Array<ICoordinate>>();
+export class SnowflakeService { 
+  private snowflakeCoordinates: Array<ICoordinate> = new Array<ICoordinate>();
+  public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
 
-  constructor() {
-    this.snowflakeCoordinates = new Array<ICoordinate>();   
-    this.generateCoordinate(2000, canvasWidth).subscribe(xCoordinate => this.addNewSnowflake(xCoordinate));
+  constructor() {  
+    generateCoordinate(2000, canvasWidth).subscribe(xCoordinate => this.addNewSnowflake(xCoordinate));
     timer(700, 700).subscribe(_ => this.moveSnowflakesDown());
   }
 
   private addNewSnowflake(xCoordinate: number) {
     this.snowflakeCoordinates.push({x: xCoordinate, y: 0});
-    this.snowflakeChanges$.next(this.snowflakeCoordinates);
+    this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
   private moveSnowflakesDown() {
@@ -33,11 +31,11 @@ export class SnowflakeService {
       }
     }
 
-    this.snowflakeChanges$.next(this.snowflakeCoordinates);
+    this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
+}
 
-  private generateCoordinate(inMilliseconds: number, max: number): Observable<number> {
-    return timer(inMilliseconds, inMilliseconds)
-          .pipe(map(_ => (Math.floor(Math.random() * max))));
-  }
+function generateCoordinate(inMilliseconds: number, max: number): Observable<number> {
+  return timer(inMilliseconds, inMilliseconds)
+        .pipe(map(_ => (Math.floor(Math.random() * max))));
 }
