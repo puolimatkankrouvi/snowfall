@@ -1,16 +1,7 @@
-import { Observable, timer } from "rxjs";
-import { map } from "rxjs/operators";
-
-export interface ICoordinates {
+export interface ICoordinate {
   x: number;
   y: number;
 }
 
-function randomNumber(max: number) {
-  return Math.floor(Math.random() * max);
-}
-
-export function generateCoordinate(inMilliseconds: number, max: number): Observable<number> {
-  return timer(inMilliseconds, inMilliseconds)
-        .pipe(map(_ => (randomNumber(max))));
-}
+export const canvasWidth = 800;
+export const canvasHeight = 600;

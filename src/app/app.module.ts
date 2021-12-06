@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { SnowflakeService } from 'src/app/snowflake.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { CanvasComponent } from './canvas/canvas.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [SnowflakeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
