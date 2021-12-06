@@ -5,7 +5,8 @@ import { SnowflakeService } from '../snowflake.service';
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.less']
+  styleUrls: ['./canvas.component.less'],
+  providers: [SnowflakeService]
 })
 export class CanvasComponent implements AfterViewInit {
   @ViewChild('canvasEl') canvasEl!: ElementRef;
