@@ -1,21 +1,21 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { canvasWidth, canvasHeight, ICoordinate } from 'src/app/coordinates';
-import { SnowflakeService } from 'src/app/snowflake.service';
+import { SnowService } from 'src/app/snow.service';
 
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.less'],
-  providers: [SnowflakeService]
+  providers: [SnowService]
 })
 export class CanvasComponent implements AfterViewInit {
   @ViewChild('canvasEl') canvasEl!: ElementRef;
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  private snowflakeService: SnowflakeService;
+  private snowflakeService: SnowService;
 
-  constructor(snowService: SnowflakeService) {
+  constructor(snowService: SnowService) {
     this.snowflakeService = snowService;
   }
   
