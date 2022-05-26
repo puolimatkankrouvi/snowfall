@@ -6,7 +6,7 @@ import { canvasHeight, canvasWidth, ICoordinate } from 'src/app/coordinates';
 @Injectable({
   providedIn: 'root'
 })
-export class SnowflakeService { 
+export class SnowService { 
   private snowflakeCoordinates: Array<ICoordinate> = new Array<ICoordinate>();
   public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
   private density: number = 2000;

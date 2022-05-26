@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SnowflakeService } from './snowflake.service';
+import { SnowService } from './snow.service';
 
 describe('SnowService', () => {
-  let service: SnowflakeService;
+  let service: SnowService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SnowflakeService);
+    service = TestBed.inject(SnowService);
   });
 
   it('should be created', () => {
