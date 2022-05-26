@@ -1,0 +1,9 @@
+<div>
+    <label for="#densityInput">Density: {{ density }}</label>
+    <input id="densityInput"
+           type="range"
+           min=200
+           max=2000
+           step="100"
+           [(ngModel)]="density">
+</div>
