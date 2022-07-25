@@ -9,16 +9,21 @@ import { canvasHeight, canvasWidth, ICoordinate } from 'src/app/coordinates';
 export class SnowService { 
   private snowflakeCoordinates: Array<ICoordinate> = new Array<ICoordinate>();
   public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
-  private density: number = 2000;
   private coordinateGeneration$: Subscription;
+
+  public density: number = 2000;
+  private densityChanges$ = new Subject<number>();
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
     timer(700, 700).subscribe(_ => this.moveSnowflakesDown());
+    this.densityChanges$.subscribe(density => {
+      this.density = density;
+    });
   }
 
   public setDensity(density: number) {
-    this.density = density;
+    this.densityChanges$.next(density);
     this.coordinateGeneration$.unsubscribe();
     this.coordinateGeneration$ = this.startSnowGeneration();
   }
@@ -49,6 +54,6 @@ export class SnowService {
 }
 
 function generateCoordinate(density: number, max: number): Observable<number> {
-  return timer(0, density)
+  return timer(0, 2200 - density)
         .pipe(map(_ => (Math.floor(Math.random() * max))));
 }

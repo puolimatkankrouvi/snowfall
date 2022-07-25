@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { SnowService } from 'src/app/snow.service';
 
 @Component({
   selector: 'app-snow-settings',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./snow-settings.component.less']
 })
 export class SnowSettingsComponent {
-  density = 2000;
+  constructor(private snowService: SnowService) {}
+
+  get density() {
+    return this.snowService.density;
+  }
+
+  setDensity(event: any) {
+    this.snowService.setDensity(event.target.value);
+  }
 }

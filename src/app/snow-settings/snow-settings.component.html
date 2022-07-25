@@ -5,5 +5,6 @@
            min=200
            max=2000
            step="100"
-           [(ngModel)]="density">
+           [value]="density"
+           (input)="setDensity($event)">
 </div>
