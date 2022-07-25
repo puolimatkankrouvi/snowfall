@@ -1,10 +1,15 @@
-<div>
-    <label for="#densityInput">Density: {{ density }}</label>
-    <input id="densityInput"
-           type="range"
-           min=1
-           max=10
-           step="1"
-           [value]="density"
-           (input)="setDensity($event)">
+<div class="snow-settings mt-4">
+    <div class="snow-settings-form">
+        <div>
+            <label for="#densityInput">Density: {{ density }}</label>
+            <input class="input is-small"
+            id="densityInput"
+            type="range"
+            min=1
+            max=10
+            step=1
+            [value]="density"
+            (input)="setDensity($event)">
+        </div>
+    </div>
 </div>
