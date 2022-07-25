@@ -16,7 +16,7 @@ export class SnowService {
   private densityChanges$ = new Subject<number>();
 
   public canvasDimensions: IDimensions = { width: 800, height: 600 };
-  private canvasDimensionChanges$ = new Observable<IDimensions>();
+  public canvasDimensionChanges$ = new Subject<IDimensions>();
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
@@ -31,6 +31,15 @@ export class SnowService {
 
   public setDensity(density: number) {
     this.densityChanges$.next(density);
+    this.restartSnowGeneration();
+  }
+
+  public setCanvasDimensions(width: number, height: number) {
+    this.canvasDimensionChanges$.next({ width, height });
+    this.restartSnowGeneration();
+  }
+
+  private restartSnowGeneration() {
     this.coordinateGeneration$.unsubscribe();
     this.coordinateGeneration$ = this.startSnowGeneration();
   }
