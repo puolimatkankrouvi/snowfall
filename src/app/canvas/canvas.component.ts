@@ -12,15 +12,15 @@ export class CanvasComponent implements AfterViewInit {
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  private snowflakeService: SnowService;
+  private snowService: SnowService;
 
   constructor(snowService: SnowService) {
-    this.snowflakeService = snowService;
+    this.snowService = snowService;
   }
   
   ngAfterViewInit(): void {
     this.ctx = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
-    this.snowflakeService
+    this.snowService
       .snowflakeCoordinateChanges$
       .subscribe(snowflakeCoordinates => this.redrawSnowflakes(snowflakeCoordinates));
   }
