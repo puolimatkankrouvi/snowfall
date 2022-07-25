@@ -5,8 +5,7 @@ import { SnowService } from 'src/app/snow.service';
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.less'],
-  providers: [SnowService]
+  styleUrls: ['./canvas.component.less']
 })
 export class CanvasComponent implements AfterViewInit {
   @ViewChild('canvasEl') canvasEl!: ElementRef;
