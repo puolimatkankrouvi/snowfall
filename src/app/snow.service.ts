@@ -11,7 +11,7 @@ export class SnowService {
   public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
   private coordinateGeneration$: Subscription;
 
-  public density: number = 2000;
+  public density: number = 5;
   private densityChanges$ = new Subject<number>();
 
   constructor() {  
@@ -54,6 +54,7 @@ export class SnowService {
 }
 
 function generateCoordinate(density: number, max: number): Observable<number> {
-  return timer(0, 2200 - density)
+  const interval = 2200 - (density * 200);
+  return timer(0, interval)
         .pipe(map(_ => (Math.floor(Math.random() * max))));
 }

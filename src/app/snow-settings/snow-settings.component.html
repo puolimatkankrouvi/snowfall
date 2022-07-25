@@ -2,9 +2,9 @@
     <label for="#densityInput">Density: {{ density }}</label>
     <input id="densityInput"
            type="range"
-           min=200
-           max=2000
-           step="100"
+           min=1
+           max=10
+           step="1"
            [value]="density"
            (input)="setDensity($event)">
 </div>
