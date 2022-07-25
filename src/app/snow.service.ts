@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { canvasHeight, canvasWidth, ICoordinate } from 'src/app/coordinates';
+import { ICoordinate } from 'src/app/coordinate';
+import { IDimensions } from 'src/app/dimensions';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,17 @@ export class SnowService {
   public density: number = 5;
   private densityChanges$ = new Subject<number>();
 
+  public canvasDimensions: IDimensions = { width: 800, height: 600 };
+  private canvasDimensionChanges$ = new Observable<IDimensions>();
+
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
     timer(700, 700).subscribe(_ => this.moveSnowflakesDown());
-    this.densityChanges$.subscribe(density => {
+    this.densityChanges$.subscribe((density: number) => {
       this.density = density;
+    });
+    this.canvasDimensionChanges$.subscribe((dimensions: IDimensions) => {
+      this.canvasDimensions = dimensions;
     });
   }
 
@@ -29,8 +36,8 @@ export class SnowService {
   }
 
   private startSnowGeneration(): Subscription {
-    return generateCoordinate(this.density, canvasWidth)
-          .subscribe(xCoordinate => this.addNewSnowflake(xCoordinate));
+    return generateCoordinate(this.density, this.canvasDimensions.width)
+          .subscribe((xCoordinate: number) => this.addNewSnowflake(xCoordinate));
   }
 
   private addNewSnowflake(xCoordinate: number) {
@@ -41,7 +48,7 @@ export class SnowService {
   private moveSnowflakesDown() {
     for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
       const snowflakeCoordinate = this.snowflakeCoordinates[i];
-      if (snowflakeCoordinate.y <= canvasHeight) {       
+      if (snowflakeCoordinate.y <= this.canvasDimensions.height) {       
         snowflakeCoordinate.y += 30;
         this.snowflakeCoordinates[i] = { x: snowflakeCoordinate.x, y: snowflakeCoordinate.y };
       } else {
