@@ -20,7 +20,7 @@ export class SnowService {
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
-    timer(700, 700).subscribe(_ => this.moveSnowflakesDown());
+    timer(700, 700).subscribe(() => this.moveSnowflakesDown());
     this.densityChanges$.subscribe((density: number) => {
       this.density = density;
     });
@@ -31,17 +31,20 @@ export class SnowService {
 
   public setDensity(density: number) {
     this.densityChanges$.next(density);
-    this.restartSnowGeneration();
+    
+    this.coordinateGeneration$.unsubscribe();
+    this.coordinateGeneration$ = this.startSnowGeneration();
   }
 
   public setCanvasDimensions(width: number, height: number) {
-    this.canvasDimensionChanges$.next({ width, height });
-    this.restartSnowGeneration();
-  }
-
-  private restartSnowGeneration() {
-    this.coordinateGeneration$.unsubscribe();
-    this.coordinateGeneration$ = this.startSnowGeneration();
+    const oldWidth = this.canvasDimensions.width;
+    const oldHeight = this.canvasDimensions.height;
+    if (width !== oldWidth && height !== oldHeight) {
+      this.coordinateGeneration$.unsubscribe()
+      this.adjustSnowflakesToCanvasSize(width, oldWidth, height, oldHeight);
+      this.canvasDimensionChanges$.next({ width, height });
+      this.coordinateGeneration$ = this.startSnowGeneration();
+    }
   }
 
   private startSnowGeneration(): Subscription {
@@ -51,6 +54,20 @@ export class SnowService {
 
   private addNewSnowflake(xCoordinate: number) {
     this.snowflakeCoordinates.push({x: xCoordinate, y: 0});
+    this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
+  }
+
+  private adjustSnowflakesToCanvasSize(width: number, oldWidth: number, height: number, oldHeight: number) {
+    for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
+      const snowflakeCoordinate = this.snowflakeCoordinates[i];
+      const widthRatio = width / oldWidth;
+      const heightRatio = height / oldHeight;
+      this.snowflakeCoordinates[i] = {
+        x: snowflakeCoordinate.x * widthRatio,
+        y: snowflakeCoordinate.y * heightRatio,
+      };
+    }
+
     this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
