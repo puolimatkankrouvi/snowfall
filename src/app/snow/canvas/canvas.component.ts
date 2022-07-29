@@ -6,7 +6,7 @@ import { IDimensions } from 'src/app/snow/dimensions';
 import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
-  selector: 'app-canvas',
+  selector: 'snow-canvas',
   templateUrl: './canvas.component.html',
   styleUrls: ['./canvas.component.less']
 })
