@@ -4,9 +4,7 @@ import { map } from 'rxjs/operators';
 import { ICoordinate } from 'src/app/snow/coordinate';
 import { IDimensions } from 'src/app/snow/dimensions';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SnowService { 
   private snowflakeCoordinates: Array<ICoordinate> = new Array<ICoordinate>();
   public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
