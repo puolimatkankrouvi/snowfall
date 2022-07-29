@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SnowService } from 'src/app/snow.service';
+import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
   selector: 'app-snow-settings',

@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ICoordinate } from 'src/app/coordinate';
-import { IDimensions } from 'src/app/dimensions';
-import { SnowService } from 'src/app/snow.service';
+import { ICoordinate } from 'src/app/snow/coordinate';
+import { IDimensions } from 'src/app/snow/dimensions';
+import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
   selector: 'app-canvas',

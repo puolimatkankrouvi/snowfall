@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ICoordinate } from 'src/app/coordinate';
-import { IDimensions } from 'src/app/dimensions';
+import { ICoordinate } from 'src/app/snow/coordinate';
+import { IDimensions } from 'src/app/snow/dimensions';
 
 @Injectable({
   providedIn: 'root'

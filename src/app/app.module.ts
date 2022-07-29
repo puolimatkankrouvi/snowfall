@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CanvasComponent } from './canvas/canvas.component';
-import { SnowSettingsComponent } from './snow-settings/snow-settings.component';
+import { CanvasComponent } from './snow/canvas/canvas.component';
+import { SnowSettingsComponent } from './snow/snow-settings/snow-settings.component';
 
 @NgModule({
   declarations: [
