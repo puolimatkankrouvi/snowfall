@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Coordinate } from 'src/app/snow/coordinate';
+import { Coordinate, CoordinateAtTop } from 'src/app/snow/coordinate';
 import { CurrentAndOldDimensions, CurrentDimensions, maxCanvasHeight, maxCanvasWidth } from 'src/app/snow/dimensions';
 
 @Injectable()
@@ -47,11 +47,12 @@ export class SnowService {
 
   private startSnowGeneration(): Subscription {
     return generateCoordinate(this.density, this.canvasDimensions.width)
-          .subscribe((xCoordinate: number) => this.addNewSnowflake(xCoordinate));
+          .subscribe((xCoordinate: number) => this.addNewCoordinate(xCoordinate));
   }
 
-  private addNewSnowflake(xCoordinate: number) {
-    this.snowflakeCoordinates.push({x: xCoordinate, y: 0});
+  private addNewCoordinate(xCoordinate: number) {
+    const coordinate: CoordinateAtTop = { x: xCoordinate, y: 0 };
+    this.snowflakeCoordinates.push(coordinate);
     this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
