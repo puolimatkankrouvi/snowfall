@@ -15,16 +15,13 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  private snowService: SnowService;
-
   public canvasDimensions: CurrentDimensions
 
   resize$: Observable<Event> | null = null;
   resizeSubscription$: Subscription | null = null;
 
-  constructor(snowService: SnowService) {
-    this.snowService = snowService;
-    this.canvasDimensions = snowService.canvasDimensions
+  constructor(private readonly snowService: SnowService) {
+    this.canvasDimensions = snowService.canvasDimensions;
   }
   
   ngAfterViewInit(): void {

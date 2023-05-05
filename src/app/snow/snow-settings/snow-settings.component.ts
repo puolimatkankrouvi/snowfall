@@ -7,7 +7,7 @@ import { SnowService } from 'src/app/snow/snow.service';
   styleUrls: ['./snow-settings.component.less']
 })
 export class SnowSettingsComponent {
-  constructor(private snowService: SnowService) {}
+  constructor(private readonly snowService: SnowService) {}
 
   get density() {
     return this.snowService.density;
