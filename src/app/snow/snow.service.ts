@@ -18,7 +18,7 @@ export class SnowService {
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
-    timer(700, 700).subscribe(() => this.moveSnowflakesDown());
+    timer(700, 700).subscribe(() => this.moveSnowflakeCoordinatesDown());
     this.densityChanges$.subscribe((density: number) => {
       this.density = density;
     });
@@ -39,7 +39,7 @@ export class SnowService {
     const oldHeight = this.canvasDimensions.height;
     if (width !== oldWidth && height !== oldHeight) {
       this.coordinateGeneration$.unsubscribe()
-      this.adjustSnowflakesToCanvasSize({ width, oldWidth, height, oldHeight });
+      this.adjustSnowflakeCoordinatesToCanvasSize({ width, oldWidth, height, oldHeight });
       this.canvasDimensionChanges$.next({ width, height });
       this.coordinateGeneration$ = this.startSnowGeneration();
     }
@@ -47,16 +47,16 @@ export class SnowService {
 
   private startSnowGeneration(): Subscription {
     return generateCoordinate(this.density, this.canvasDimensions.width)
-          .subscribe((xCoordinate: number) => this.addNewCoordinate(xCoordinate));
+          .subscribe((xCoordinate: number) => this.addNewSnowflakeCoordinate(xCoordinate));
   }
 
-  private addNewCoordinate(xCoordinate: number) {
+  private addNewSnowflakeCoordinate(xCoordinate: number) {
     const coordinate: CoordinateAtTop = { x: xCoordinate, y: 0 };
     this.snowflakeCoordinates.push(coordinate);
     this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
-  private adjustSnowflakesToCanvasSize(dimensions: CurrentAndOldDimensions) {
+  private adjustSnowflakeCoordinatesToCanvasSize(dimensions: CurrentAndOldDimensions) {
     for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
       const snowflakeCoordinate = this.snowflakeCoordinates[i];
       const widthRatio = dimensions.width / dimensions.oldWidth;
@@ -70,7 +70,7 @@ export class SnowService {
     this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
-  private moveSnowflakesDown() {
+  private moveSnowflakeCoordinatesDown() {
     for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
       const snowflakeCoordinate = this.snowflakeCoordinates[i];
       if (snowflakeCoordinate.y <= this.canvasDimensions.height) {       
