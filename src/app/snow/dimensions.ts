@@ -9,3 +9,6 @@ export type CurrentDimensions = {
 }
 
 export type CurrentAndOldDimensions = CurrentDimensions & OldDimensions;
+
+export const maxCanvasWidth = 800;
+export const maxCanvasHeight = 600;

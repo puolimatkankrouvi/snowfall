@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
-import { CurrentDimensions } from 'src/app/snow/dimensions';
+import { CurrentDimensions, maxCanvasHeight, maxCanvasWidth } from 'src/app/snow/dimensions';
 import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
@@ -40,8 +40,8 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
       const height = event.target.innerHeight - 10;
 
       this.snowService.setCanvasDimensions(
-        Math.min(width, 800),
-        Math.min(height, 600),
+        Math.min(width, maxCanvasWidth),
+        Math.min(height, maxCanvasHeight),
       );
     });
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
-import { CurrentAndOldDimensions, CurrentDimensions } from 'src/app/snow/dimensions';
+import { CurrentAndOldDimensions, CurrentDimensions, maxCanvasHeight, maxCanvasWidth } from 'src/app/snow/dimensions';
 
 @Injectable()
 export class SnowService { 
@@ -13,7 +13,7 @@ export class SnowService {
   public density: number = 5;
   private densityChanges$ = new Subject<number>();
 
-  public canvasDimensions: CurrentDimensions = { width: 800, height: 600 };
+  public canvasDimensions: CurrentDimensions = { width: maxCanvasWidth, height: maxCanvasHeight };
   public canvasDimensionChanges$ = new Subject<CurrentDimensions>();
 
   constructor() {  
