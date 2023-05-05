@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
-import { Dimensions } from 'src/app/snow/dimensions';
+import { CurrentAndOldDimensions, CurrentDimensions } from 'src/app/snow/dimensions';
 
 @Injectable()
 export class SnowService { 
@@ -13,8 +13,8 @@ export class SnowService {
   public density: number = 5;
   private densityChanges$ = new Subject<number>();
 
-  public canvasDimensions: Dimensions = { width: 800, height: 600 };
-  public canvasDimensionChanges$ = new Subject<Dimensions>();
+  public canvasDimensions: CurrentDimensions = { width: 800, height: 600 };
+  public canvasDimensionChanges$ = new Subject<CurrentDimensions>();
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
@@ -22,7 +22,7 @@ export class SnowService {
     this.densityChanges$.subscribe((density: number) => {
       this.density = density;
     });
-    this.canvasDimensionChanges$.subscribe((dimensions: Dimensions) => {
+    this.canvasDimensionChanges$.subscribe((dimensions: CurrentDimensions) => {
       this.canvasDimensions = dimensions;
     });
   }
@@ -39,7 +39,7 @@ export class SnowService {
     const oldHeight = this.canvasDimensions.height;
     if (width !== oldWidth && height !== oldHeight) {
       this.coordinateGeneration$.unsubscribe()
-      this.adjustSnowflakesToCanvasSize(width, oldWidth, height, oldHeight);
+      this.adjustSnowflakesToCanvasSize({ width, oldWidth, height, oldHeight });
       this.canvasDimensionChanges$.next({ width, height });
       this.coordinateGeneration$ = this.startSnowGeneration();
     }
@@ -55,11 +55,11 @@ export class SnowService {
     this.snowflakeCoordinateChanges$.next(this.snowflakeCoordinates);
   }
 
-  private adjustSnowflakesToCanvasSize(width: number, oldWidth: number, height: number, oldHeight: number) {
+  private adjustSnowflakesToCanvasSize(dimensions: CurrentAndOldDimensions) {
     for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
       const snowflakeCoordinate = this.snowflakeCoordinates[i];
-      const widthRatio = width / oldWidth;
-      const heightRatio = height / oldHeight;
+      const widthRatio = dimensions.width / dimensions.oldWidth;
+      const heightRatio = dimensions.height /dimensions. oldHeight;
       this.snowflakeCoordinates[i] = {
         x: snowflakeCoordinate.x * widthRatio,
         y: snowflakeCoordinate.y * heightRatio,
