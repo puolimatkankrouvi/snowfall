@@ -1,4 +1,4 @@
-export interface IDimensions {
+export type Dimensions = {
     width: number;
     height: number;
 }

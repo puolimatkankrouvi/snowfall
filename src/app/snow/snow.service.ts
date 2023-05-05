@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
-import { IDimensions } from 'src/app/snow/dimensions';
+import { Dimensions } from 'src/app/snow/dimensions';
 
 @Injectable()
 export class SnowService { 
@@ -13,8 +13,8 @@ export class SnowService {
   public density: number = 5;
   private densityChanges$ = new Subject<number>();
 
-  public canvasDimensions: IDimensions = { width: 800, height: 600 };
-  public canvasDimensionChanges$ = new Subject<IDimensions>();
+  public canvasDimensions: Dimensions = { width: 800, height: 600 };
+  public canvasDimensionChanges$ = new Subject<Dimensions>();
 
   constructor() {  
     this.coordinateGeneration$ = this.startSnowGeneration();
@@ -22,7 +22,7 @@ export class SnowService {
     this.densityChanges$.subscribe((density: number) => {
       this.density = density;
     });
-    this.canvasDimensionChanges$.subscribe((dimensions: IDimensions) => {
+    this.canvasDimensionChanges$.subscribe((dimensions: Dimensions) => {
       this.canvasDimensions = dimensions;
     });
   }
