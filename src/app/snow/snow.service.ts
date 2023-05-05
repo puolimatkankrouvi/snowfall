@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ICoordinate } from 'src/app/snow/coordinate';
+import { Coordinate } from 'src/app/snow/coordinate';
 import { IDimensions } from 'src/app/snow/dimensions';
 
 @Injectable()
 export class SnowService { 
-  private snowflakeCoordinates: Array<ICoordinate> = new Array<ICoordinate>();
-  public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<ICoordinate>>();
+  private snowflakeCoordinates: Array<Coordinate> = new Array<Coordinate>();
+  public snowflakeCoordinateChanges$ = new Subject<ReadonlyArray<Coordinate>>();
   private coordinateGeneration$: Subscription;
 
   public density: number = 5;

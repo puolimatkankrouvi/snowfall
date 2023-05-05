@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ICoordinate } from 'src/app/snow/coordinate';
+import { Coordinate } from 'src/app/snow/coordinate';
 import { IDimensions } from 'src/app/snow/dimensions';
 import { SnowService } from 'src/app/snow/snow.service';
 
@@ -47,14 +47,14 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
 
     this.snowService
       .snowflakeCoordinateChanges$
-      .subscribe((snowflakeCoordinates: ReadonlyArray<ICoordinate>) => this.redrawSnowflakes(snowflakeCoordinates));
+      .subscribe((snowflakeCoordinates: ReadonlyArray<Coordinate>) => this.redrawSnowflakes(snowflakeCoordinates));
   }
 
   ngOnDestroy(): void {
     this.resizeSubscription$!.unsubscribe();
   }
   
-  private redrawSnowflakes(snowflakeCoordinates: ReadonlyArray<ICoordinate>) { 
+  private redrawSnowflakes(snowflakeCoordinates: ReadonlyArray<Coordinate>) { 
     this.ctx!.clearRect(0, 0, this.canvasDimensions.width, this.canvasDimensions.height);
 
     snowflakeCoordinates.forEach(coordinate => {     
