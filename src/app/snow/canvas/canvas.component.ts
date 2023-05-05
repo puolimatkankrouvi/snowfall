@@ -36,10 +36,8 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
       const width = event.target.innerWidth - 10;
       const height = event.target.innerHeight - 10;
 
-      this.snowService.setCanvasDimensions(
-        Math.min(width, maxCanvasWidth),
-        Math.min(height, maxCanvasHeight),
-      );
+      const dimensions = this.clampDimensionsToMaxCanvasDimensions(width, height);
+      this.snowService.setCanvasDimensions(dimensions);
     });
 
     this.snowService
@@ -59,6 +57,13 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
       this.ctx!.arc(coordinate.x, coordinate.y, 5, 0, 2 * Math.PI);
       this.ctx!.stroke();
     });
+  }
+
+  private clampDimensionsToMaxCanvasDimensions(width: number, height: number): CurrentDimensions {
+      return {
+        width: Math.min(width, maxCanvasWidth),
+        height: Math.min(height, maxCanvasHeight),
+      };
   }
 }
 

@@ -34,9 +34,11 @@ export class SnowService {
     this.coordinateGeneration$ = this.startSnowGeneration();
   }
 
-  public setCanvasDimensions(width: number, height: number) {
+  public setCanvasDimensions(dimensions: CurrentDimensions) {
+    const { width, height } = dimensions;
     const oldWidth = this.canvasDimensions.width;
     const oldHeight = this.canvasDimensions.height;
+
     if (width !== oldWidth && height !== oldHeight) {
       this.coordinateGeneration$.unsubscribe()
       this.adjustSnowflakeCoordinatesToCanvasSize({ width, oldWidth, height, oldHeight });
