@@ -90,5 +90,7 @@
       }
     }
   },
-  "defaultProject": "snowfall"
+  "cli": {
+    "analytics": false
+  }
 }
