@@ -16,7 +16,6 @@
     "@angular/forms": "~13.3.11",
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~13.3.11",
-    "@angular/router": "~13.3.11",
     "bulma": "^0.9.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
