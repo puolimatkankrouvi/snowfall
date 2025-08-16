@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
-  selector: 'snow-settings',
-  templateUrl: './snow-settings.component.html',
-  styleUrls: ['./snow-settings.component.less']
+    selector: 'snow-settings',
+    templateUrl: './snow-settings.component.html',
+    styleUrls: ['./snow-settings.component.less'],
+    standalone: true
 })
 export class SnowSettingsComponent {
   constructor(private readonly snowService: SnowService) {}

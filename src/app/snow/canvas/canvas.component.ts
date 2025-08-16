@@ -6,9 +6,10 @@ import { CurrentDimensions, maxCanvasHeight, maxCanvasWidth } from 'src/app/snow
 import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
-  selector: 'snow-canvas',
-  templateUrl: './canvas.component.html',
-  styleUrls: ['./canvas.component.less']
+    selector: 'snow-canvas',
+    templateUrl: './canvas.component.html',
+    styleUrls: ['./canvas.component.less'],
+    standalone: true
 })
 export class CanvasComponent implements OnDestroy, AfterViewInit {
   @ViewChild('canvasEl') canvasEl!: ElementRef;
