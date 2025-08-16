@@ -6,13 +6,8 @@ import { SnowService } from "src/app/snow/snow.service";
 import { SnowRootComponent } from './snow-root.component';
 
 @NgModule({
-  declarations: [
-    SnowRootComponent,
-    CanvasComponent,
-    SnowSettingsComponent,
-  ],
-  imports: [CommonModule],
-  providers: [SnowService],
-  exports: [SnowRootComponent]
+    imports: [CommonModule, SnowRootComponent, CanvasComponent, SnowSettingsComponent],
+    providers: [SnowService],
+    exports: [SnowRootComponent]
 })
 export class SnowModule {}
