@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 
 import { environment } from './environments/environment';
@@ -11,6 +11,9 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [importProvidersFrom(BrowserModule, SnowModule)]
+    providers: [
+      importProvidersFrom(BrowserModule, SnowModule),
+      provideExperimentalZonelessChangeDetection()
+    ]
 })
   .catch(err => console.error(err));
