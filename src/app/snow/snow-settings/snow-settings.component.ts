@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SnowService } from 'src/app/snow/snow.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SnowService } from 'src/app/snow/snow.service';
     standalone: true
 })
 export class SnowSettingsComponent {
-  constructor(private readonly snowService: SnowService) {}
+  private readonly snowService: SnowService = inject(SnowService);
 
   get density() {
     return this.snowService.density;
