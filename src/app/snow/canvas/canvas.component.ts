@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
@@ -13,17 +13,14 @@ import { SnowService } from 'src/app/snow/snow.service';
 })
 export class CanvasComponent implements OnDestroy, AfterViewInit {
   @ViewChild('canvasEl') canvasEl!: ElementRef;
+  private readonly snowService: SnowService = inject(SnowService);
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  public canvasDimensions: CurrentDimensions
+  public canvasDimensions: CurrentDimensions = this.snowService.canvasDimensions;
 
   resize$: Observable<Event> | null = null;
   resizeSubscription$: Subscription | null = null;
-
-  constructor(private readonly snowService: SnowService) {
-    this.canvasDimensions = snowService.canvasDimensions;
-  }
   
   ngAfterViewInit(): void {
     this.ctx = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
