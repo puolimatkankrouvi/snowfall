@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, signal, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Coordinate } from 'src/app/snow/coordinate';
@@ -17,17 +17,13 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  public canvasDimensions: CurrentDimensions = this.snowService.canvasDimensions;
+  public canvasDimensions = signal(this.snowService.canvasDimensions);
 
   resize$: Observable<Event> | null = null;
   resizeSubscription$: Subscription | null = null;
   
   ngAfterViewInit(): void {
     this.ctx = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
-
-    this.snowService.canvasDimensionChanges$.subscribe((canvasDimensions: CurrentDimensions) => {
-      this.canvasDimensions = canvasDimensions
-    });
 
     this.resize$ = fromEvent(window, "resize");
     this.resizeSubscription$ = this.resize$.pipe(debounceTime(500)).subscribe((event: any) => {
@@ -48,7 +44,7 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
   }
   
   private redrawSnowflakes(snowflakeCoordinates: ReadonlyArray<Coordinate>) { 
-    this.ctx!.clearRect(0, 0, this.canvasDimensions.width, this.canvasDimensions.height);
+    this.ctx!.clearRect(0, 0, this.canvasDimensions()!.width, this.canvasDimensions()!.height);
 
     snowflakeCoordinates.forEach(coordinate => {     
       this.ctx!.beginPath()
