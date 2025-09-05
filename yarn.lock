@@ -48,7 +48,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/build@^19.2.15":
+"@angular/build@19.2.15":
   version "19.2.15"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-19.2.15.tgz#c1931f5a77041ec8f575083fffd1f0b207f8fd4c"
   integrity sha512-iE4fp4d5ALu702uoL6/YkjM2JlGEXZ5G+RVzq3W2jg/Ft6ISAQnRKB6mymtetDD6oD7i87e8uSu9kFVNBauX2w==
