@@ -44,7 +44,7 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
   }
   
   private redrawSnowflakes(snowflakeCoordinates: ReadonlyArray<Coordinate>) { 
-    this.ctx!.clearRect(0, 0, this.canvasDimensions()!.width, this.canvasDimensions()!.height);
+    this.ctx!.clearRect(0, 0, this.canvasDimensions().width, this.canvasDimensions().height);
 
     snowflakeCoordinates.forEach(coordinate => {     
       this.ctx!.beginPath()
