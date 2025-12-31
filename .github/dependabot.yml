@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "@angular/**"
+        versions:
+          - ">=21.0.0"
+      - dependency-name: "@types/node"
+        versions:
+          - ">=23.0.0"
