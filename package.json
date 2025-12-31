@@ -24,7 +24,7 @@
     "@angular/cli": "20.3.13",
     "@angular/compiler-cli": "20.3.9",
     "@types/jest": "30.0.0",
-    "@types/node": "22.15.35",
+    "@types/node": "22.19.3",
     "less": "4.4.2",
     "typescript": "~5.9.2",
     "zone.js": "0.15.1"
