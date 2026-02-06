@@ -23,7 +23,7 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
   resizeSubscription$: Subscription | null = null;
   
   ngAfterViewInit(): void {
-    this.ctx = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
+    this.ctx = (this.canvasEl.nativeElement satisfies HTMLCanvasElement).getContext('2d');
 
     this.resize$ = fromEvent(window, "resize");
     this.resizeSubscription$ = this.resize$.pipe(debounceTime(500)).subscribe((event: any) => {
