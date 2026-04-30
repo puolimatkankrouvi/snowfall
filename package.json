@@ -26,7 +26,7 @@
     "@types/jest": "30.0.0",
     "@types/node": "22.19.17",
     "less": "4.6.4",
-    "typescript": "~6.0.2",
+    "typescript": "~5.9.3",
     "zone.js": "0.16.1"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
