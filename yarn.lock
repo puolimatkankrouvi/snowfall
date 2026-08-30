@@ -213,17 +213,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/animations@npm:21.2.22":
-  version: 21.2.22
-  resolution: "@angular/animations@npm:21.2.22"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  peerDependencies:
-    "@angular/core": 21.2.22
-  checksum: 10c0/9ee55a8bde8a3cd7adc714b9302092f49a82c92914ed4a29b38f872d6e8118a0c662505fe8b0167af04d36302426f28cadca987dc3cf3b964e846d6bbe75f336
-  languageName: node
-  linkType: hard
-
 "@angular/build@npm:21.2.22":
   version: 21.2.22
   resolution: "@angular/build@npm:21.2.22"
@@ -5396,7 +5385,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "snowfall@workspace:."
   dependencies:
-    "@angular/animations": "npm:21.2.22"
     "@angular/build": "npm:21.2.22"
     "@angular/cli": "npm:21.2.22"
     "@angular/common": "npm:21.2.22"
