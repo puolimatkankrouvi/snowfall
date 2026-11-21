@@ -75,7 +75,7 @@ export class SnowService {
         snowflakeCoordinate.y += 30;
         this.snowflakeCoordinates[i] = { x: snowflakeCoordinate.x, y: snowflakeCoordinate.y };
       } else {
-        this.snowflakeCoordinates.slice(i);
+        this.snowflakeCoordinates.splice(i);
       }
     }
 
