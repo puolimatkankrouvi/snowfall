@@ -67,9 +67,10 @@ export class SnowService {
   }
 
   private moveSnowflakeCoordinatesDown() {
+    const currentHeight = this.canvasDimensions().height;
     for (let i = 0; i < this.snowflakeCoordinates.length; i++) {
       const snowflakeCoordinate = this.snowflakeCoordinates[i];
-      if (snowflakeCoordinate.y <= this.canvasDimensions().height) {       
+      if (snowflakeCoordinate.y <= currentHeight) {       
         snowflakeCoordinate.y += 30;
         this.snowflakeCoordinates[i] = { x: snowflakeCoordinate.x, y: snowflakeCoordinate.y };
       } else {
