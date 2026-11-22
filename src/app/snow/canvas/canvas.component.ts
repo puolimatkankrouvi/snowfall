@@ -17,7 +17,7 @@ export class CanvasComponent implements OnDestroy, AfterViewInit {
 
   private ctx!: CanvasRenderingContext2D | null;
 
-  public canvasDimensions = signal(this.snowService.canvasDimensions);
+  public canvasDimensions = this.snowService.canvasDimensions;
 
   resize$: Observable<Event> | null = null;
   resizeSubscription$: Subscription | null = null;
