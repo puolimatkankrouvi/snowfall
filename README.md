@@ -8,3 +8,4 @@ TODO:
 - [x] Angular 21 update
 - [ ] Angular 22 update
 - [ ] Standalone components
+- [ ] Remove unused Angular packages
