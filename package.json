@@ -22,7 +22,6 @@
     "@angular/build": "21.2.31",
     "@angular/cli": "21.2.31",
     "@angular/compiler-cli": "21.2.26",
-    "@types/jest": "30.0.0",
     "@types/node": "24.19.2",
     "less": "4.9.1",
     "typescript": "~5.9.3",
